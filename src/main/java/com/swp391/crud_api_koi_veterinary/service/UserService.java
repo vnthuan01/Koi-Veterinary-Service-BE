@@ -25,7 +25,7 @@ public class UserService {
         user.setPhone(request.getPhone());
         return userRepository.save(user);
     }
-
+    //Lấy danh sách account
     public List<UserAccount> getUserAccount(){
         return userRepository.findAll();
     }
