@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -22,5 +24,9 @@ public class UserService {
         user.setAddress(request.getAddress());
         user.setPhone(request.getPhone());
         return userRepository.save(user);
+    }
+
+    public List<UserAccount> getUserAccount(){
+        return userRepository.findAll();
     }
 }
