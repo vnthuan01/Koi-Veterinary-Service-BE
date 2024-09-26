@@ -16,6 +16,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
+    //Thêm 1 account
     public UserAccount createUser(UserCreationRequest request) {
         UserAccount user = new UserAccount();
         user.setUsername(request.getUsername());
@@ -30,8 +31,20 @@ public class UserService {
         user.setPhone(request.getPhone());
         return userRepository.save(user);
     }
+
     //Lấy danh sách account
     public List<UserAccount> getUserAccount(){
         return userRepository.findAll();
+    }
+
+    //xem thông tin theo id
+    public UserAccount getUserInfo(int userId){
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    //Xóa 1 account theo id
+    public void deleteAccount(int userId){
+        userRepository.deleteById(userId);
     }
 }
