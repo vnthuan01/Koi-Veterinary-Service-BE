@@ -1,6 +1,7 @@
 package com.swp391.crud_api_koi_veterinary.controller;
 
 import com.swp391.crud_api_koi_veterinary.model.dto.request.UserCreationRequest;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.UserUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.UserAccount;
 import com.swp391.crud_api_koi_veterinary.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class CustomerController {
     public String deleteUser(@PathVariable int userId) {
         customerService.deleteAccount(userId);
         return "User has been deleted";
+    }
+//Update API
+    @PutMapping({"/{userId}"})
+    UserAccount updateUser(@PathVariable int userId, @RequestBody UserUpdateRequest request){
+        return customerService.updateUser(userId, request);
     }
 }

@@ -1,6 +1,7 @@
 package com.swp391.crud_api_koi_veterinary.service;
 
 import com.swp391.crud_api_koi_veterinary.model.dto.request.UserCreationRequest;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.UserUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.UserAccount;
 import com.swp391.crud_api_koi_veterinary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,19 @@ public class CustomerService {
     //Xóa 1 account theo id
     public void deleteAccount(int userId){
         userRepository.deleteById(userId);
+    }
+
+    //Update thông tin cá nhân
+    public UserAccount updateUser(int userId, UserUpdateRequest request){
+        UserAccount userAccount = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        userAccount.setPassword(passwordEncoder.encode(request.getPassword()));
+        userAccount.setEmail(request.getEmail());
+        userAccount.setPhone(request.getPhone());
+        userAccount.setFirstName(request.getFirstName());
+        userAccount.setLastName(request.getLastName());
+
+        return userRepository.save(userAccount);
     }
 }
