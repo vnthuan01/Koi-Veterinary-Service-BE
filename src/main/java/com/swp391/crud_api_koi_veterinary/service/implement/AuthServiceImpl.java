@@ -37,6 +37,7 @@ public class AuthServiceImpl implements AuthService {
             var user = userRepository.findUserByUsername(authentication.getName()).orElseThrow();
             var accessToken = jwtService.generateAccessToken(authentication);
             return AuthenticationResponse.builder()
+                    .id(user.getId()) // Thêm id vào response
                     .accessToken(accessToken)
                     .role(user.getRole())
                     .finishTime(LocalDateTime.now())
@@ -69,10 +70,15 @@ public class AuthServiceImpl implements AuthService {
 
         String accessToken = jwtService.generateAccessToken(authentication);
         return AuthenticationResponse.builder()
+                .id(user.getId()) // Thêm id vào response
                 .accessToken(accessToken)
                 .role(user.getRole())
                 .finishTime(LocalDateTime.now())
                 .build();
+    }
+
+    public void logout() {
+        SecurityContextHolder.clearContext(); // Xóa thông tin xác thực khỏi SecurityContext
     }
 }
 
