@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/services")
-@RequiredArgsConstructor
-@NoArgsConstructor
 public class Koi_vetServicesController {
 
 }
