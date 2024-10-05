@@ -89,7 +89,7 @@ public class AuthServiceImpl implements AuthService {
 
         UserAccount user = new UserAccount();
         user.setUsername(request.getPhone());
-        user.setPassword(passwordEncoder.encode("123456")); // Mật khẩu mặc định
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // Mật khẩu mặc định
         user.setFullname(request.getFullname());
         user.setPhone(request.getPhone());
         user.setAddress(request.getAddress());
@@ -98,7 +98,7 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
 
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getPhone(), "123456")
+            new UsernamePasswordAuthenticationToken(request.getPhone(), request.getPassword())
         );
 
         String accessToken = jwtService.generateAccessToken(authentication);
