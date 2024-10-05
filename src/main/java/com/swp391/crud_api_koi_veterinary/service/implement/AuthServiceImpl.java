@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             var user = userRepository.findUserByUsername(authentication.getName()).orElseThrow();
             var accessToken = jwtService.generateAccessToken(authentication);
-            
+
             return AuthenticationResponse.builder()
                     .accessToken(accessToken)
                     .role(user.getRole())
@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService {
         if (userRepository.findUserByUsername(request.getPhone()).isPresent()) {
             throw new RuntimeException("Phone number is already in use");
         }
-        
+
         UserAccount user = new UserAccount();
         user.setUsername(request.getPhone());
         user.setPassword(passwordEncoder.encode("123456")); // Mật khẩu mặc định
