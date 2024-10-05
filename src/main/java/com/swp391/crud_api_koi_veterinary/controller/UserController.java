@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/customers")
 @RequiredArgsConstructor
-public class CustomerController {
+public class UserController {
 
     private final CustomerService customerService;
 
     @PostMapping
     public UserAccount createUser(@RequestBody UserCreationRequest request) {
-        return customerService.createUser(request);
-    }
+        return customerService.createUser(request);}
 
     @GetMapping
     public List<UserAccount> getUserAccounts() {

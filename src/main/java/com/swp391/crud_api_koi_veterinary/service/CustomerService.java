@@ -23,8 +23,7 @@ public class CustomerService {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword())); // Mã hóa mật khẩu
         user.setEmail(request.getEmail());
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
+        user.setFullname(request.getFullname());
         user.setRole("CUSTOMER"); // Mặc định là CUSTOMER
         user.setAddress(request.getAddress());
         user.setPhone(request.getPhone());
@@ -51,12 +50,10 @@ public class CustomerService {
     public UserAccount updateUser(int userId, UserUpdateRequest request){
         UserAccount userAccount = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
         userAccount.setPassword(passwordEncoder.encode(request.getPassword()));
         userAccount.setEmail(request.getEmail());
         userAccount.setPhone(request.getPhone());
-        userAccount.setFirstName(request.getFirstName());
-        userAccount.setLastName(request.getLastName());
+        userAccount.setAddress(request.getAddress());
 
         return userRepository.save(userAccount);
     }

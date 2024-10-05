@@ -35,10 +35,6 @@ public class UserAccount{
     @Column(name = "role")
     private String role;
 
-    @Column(name = "firstName")
-    private String firstName;
-
-    @Column(name = "lastName")
-    private String lastName;
-
+    @Column(name = "fullname")
+    private String fullname;
 }

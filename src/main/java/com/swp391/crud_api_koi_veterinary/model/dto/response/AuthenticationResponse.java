@@ -11,4 +11,9 @@ public class AuthenticationResponse {
     private String accessToken;
     private String role;
     private LocalDateTime finishTime;
+    private String username;
+    private String email;
+    private String phone;
+    private String address;
+    private String fullname;
 }
