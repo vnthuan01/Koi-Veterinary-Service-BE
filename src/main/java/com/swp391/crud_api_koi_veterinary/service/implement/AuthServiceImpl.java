@@ -39,9 +39,10 @@ public class AuthServiceImpl implements AuthService {
             var accessToken = jwtService.generateAccessToken(authentication);
 
             return AuthenticationResponse.builder()
+                    .finishTime(LocalDateTime.now())
+                    .id(user.getId())
                     .accessToken(accessToken)
                     .role(user.getRole())
-                    .finishTime(LocalDateTime.now())
                     .username(user.getUsername())
                     .email(user.getEmail())
                     .phone(user.getPhone())
