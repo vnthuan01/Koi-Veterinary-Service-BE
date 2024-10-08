@@ -30,5 +30,23 @@ public class Koi_vetService{
         return koi_vetRepository.findAll();
     }
 
+    //3. Update 1 Service theo Id
+    public Koi_vetServices updateService(int serviceId, Koi_vetServiceUpdateRequest request) {
+        Koi_vetServices service = koi_vetRepository.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service not found"));
+        service.setServiceName(request.getServiceName());
+        service.setServiceDescription(request.getServiceDescription());
+        return koi_vetRepository.save(service);
+    }
 
+    //4. Xóa 1 Service theo Id
+    public void deleteService(int serviceId) {
+        koi_vetRepository.deleteById(serviceId);
+    }
+
+    //5. Lấy 1 Service theo Id
+    public Optional<Koi_vetServices> getServiceById(int serviceId) {
+        return Optional.ofNullable(koi_vetRepository.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service not found")));
+    }
 }
