@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Koi_vetServicesType {
+public class ServicesType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

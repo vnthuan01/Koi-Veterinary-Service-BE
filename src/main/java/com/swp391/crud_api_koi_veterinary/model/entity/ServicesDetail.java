@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Koi_vetServicesDetail {
+public class ServicesDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,9 @@ public class Koi_vetServicesDetail {
 
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = false)
-    private Koi_vetServices serviceId;
+    private Services serviceId;
 
     @ManyToOne
     @JoinColumn(name = "service_type_id", nullable = false)
-    private Koi_vetServicesType serviceTypeId;
+    private ServicesType serviceTypeId;
 }

@@ -1,9 +1,9 @@
 package com.swp391.crud_api_koi_veterinary.service;
 
-import com.swp391.crud_api_koi_veterinary.model.dto.request.Koi_vetServiceCreationRequest;
-import com.swp391.crud_api_koi_veterinary.model.dto.request.Koi_vetServiceUpdateRequest;
-import com.swp391.crud_api_koi_veterinary.model.entity.Koi_vetServices;
-import com.swp391.crud_api_koi_veterinary.repository.Koi_vetRepository;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.ServiceCreationRequest;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.ServiceUpdateRequest;
+import com.swp391.crud_api_koi_veterinary.model.entity.Services;
+import com.swp391.crud_api_koi_veterinary.repository.ServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,24 +15,24 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class Koi_vetService{
     @Autowired
-    private final Koi_vetRepository koi_vetRepository;
+    private final ServiceRepository koi_vetRepository;
 
 //1. Tạo 1 Service
-    public Koi_vetServices createService(Koi_vetServiceCreationRequest request) {
-        Koi_vetServices service = new Koi_vetServices();
+    public Services createService(ServiceCreationRequest request) {
+        Services service = new Services();
         service.setServiceName(request.getServiceName());
         service.setServiceDescription(request.getServiceDescription());
         return koi_vetRepository.save(service);
     }
 
 //2. Lấy danh sách Services
-    public List<Koi_vetServices> getAllServices() {
+    public List<Services> getAllServices() {
         return koi_vetRepository.findAll();
     }
 
     //3. Update 1 Service theo Id
-    public Koi_vetServices updateService(int serviceId, Koi_vetServiceUpdateRequest request) {
-        Koi_vetServices service = koi_vetRepository.findById(serviceId)
+    public Services updateService(int serviceId, ServiceUpdateRequest request) {
+        Services service = koi_vetRepository.findById(serviceId)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
         service.setServiceName(request.getServiceName());
         service.setServiceDescription(request.getServiceDescription());
@@ -45,7 +45,7 @@ public class Koi_vetService{
     }
 
     //5. Lấy 1 Service theo Id
-    public Optional<Koi_vetServices> getServiceById(int serviceId) {
+    public Optional<Services> getServiceById(int serviceId) {
         return Optional.ofNullable(koi_vetRepository.findById(serviceId)
                 .orElseThrow(() -> new RuntimeException("Service not found")));
     }
