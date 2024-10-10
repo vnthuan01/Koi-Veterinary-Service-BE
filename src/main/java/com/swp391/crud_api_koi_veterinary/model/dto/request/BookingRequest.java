@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class BookingRequest {
     private Integer servicesDetailId;
-    private Integer veterinarianId;
     private Integer slotId;
 }

@@ -8,7 +8,9 @@ import com.swp391.crud_api_koi_veterinary.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,21 +23,17 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking createBooking(BookingRequest request, String username) {
         UserAccount user = userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         ServicesDetail servicesDetail = servicesDetailRepository.findById(request.getServicesDetailId())
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy chi tiết dịch vụ"));
-
-        UserAccount veterinarian = userRepository.findById(request.getVeterinarianId())
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy bác sĩ thú y"));
+                .orElseThrow(() -> new RuntimeException("Services not found"));
 
         TimeSlot timeSlot = timeSlotRepository.findById(request.getSlotId())
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy khung giờ"));
+                .orElseThrow(() -> new RuntimeException("Slot not found"));
 
         Booking booking = new Booking();
         booking.setUser(user);
         booking.setServicesDetail(servicesDetail);
-        booking.setVeterinarian(veterinarian);
         booking.setSlot(timeSlot);
         booking.setBookingTime(LocalDateTime.now());
         booking.setStatus(BookingStatus.PENDING);
@@ -43,5 +41,13 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.save(booking);
     }
 
-    // Triển khai các phương thức khác nếu có
+    @Override
+    public List<ServicesDetail> getAvailableServices() {
+        return servicesDetailRepository.findAllWithDetails();
+    }
+
+    @Override
+    public List<TimeSlot> getAvailableTimeSlots() {
+        return timeSlotRepository.findBySlotDateGreaterThanEqual(LocalDate.now());
+    }
 }
