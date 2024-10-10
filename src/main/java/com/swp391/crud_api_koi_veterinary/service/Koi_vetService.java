@@ -34,8 +34,17 @@ public class Koi_vetService{
     public Koi_vetServices updateService(int serviceId, Koi_vetServiceUpdateRequest request) {
         Koi_vetServices service = koi_vetRepository.findById(serviceId)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
-        service.setServiceName(request.getServiceName());
-        service.setServiceDescription(request.getServiceDescription());
+        
+        // Cập nhật tên dịch vụ nếu có giá trị mới
+        if (request.getServiceName() != null && !request.getServiceName().isEmpty()) {
+            service.setServiceName(request.getServiceName());
+        }
+        
+        // Cập nhật mô tả dịch vụ nếu có giá trị mới
+        if (request.getServiceDescription() != null && !request.getServiceDescription().isEmpty()) {
+            service.setServiceDescription(request.getServiceDescription());
+        }
+        
         return koi_vetRepository.save(service);
     }
 

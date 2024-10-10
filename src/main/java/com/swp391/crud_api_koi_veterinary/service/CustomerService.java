@@ -36,9 +36,14 @@ public class CustomerService {
     }
 
     //xem thông tin theo id
-    public UserAccount getUserInfo(int userId){
-        return userRepository.findById(userId)
+    public UserAccount getUserInfo(int userId) {
+        UserAccount user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        // Đặt mật khẩu thành null để không trả về
+        user.setPassword(null);
+        
+        return user;
     }
 
     //Xóa 1 account theo id
@@ -47,14 +52,28 @@ public class CustomerService {
     }
 
     //Update thông tin cá nhân
-    public UserAccount updateUser(int userId, UserUpdateRequest request){
+    public UserAccount updateUser(int userId, UserUpdateRequest request) {
         UserAccount userAccount = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        userAccount.setPassword(passwordEncoder.encode(request.getPassword()));
-        userAccount.setEmail(request.getEmail());
-        userAccount.setPhone(request.getPhone());
-        userAccount.setAddress(request.getAddress());
-
+        
+        // Chỉ cập nhật mật khẩu nếu có mật khẩu mới được cung cấp
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+            userAccount.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+        // Các trường khác được cập nhật nếu có giá trị mới
+        if (request.getEmail() != null) {
+            userAccount.setEmail(request.getEmail());
+        }
+        if (request.getPhone() != null) {
+            userAccount.setPhone(request.getPhone());
+        }
+        if (request.getAddress() != null) {
+            userAccount.setAddress(request.getAddress());
+        }
+        if (request.getFullname() != null) {
+            userAccount.setFullname(request.getFullname());
+        }
+        
         return userRepository.save(userAccount);
     }
 }
