@@ -30,9 +30,9 @@ public class CustomerService {
         return userRepository.save(user);
     }
 
-    //Lấy danh sách account
-    public List<UserAccount> getUserAccount(){
-        return userRepository.findAll();
+    //Lấy danh sách account STAFF
+    public List<UserAccount> getUserAccount() {
+        return userRepository.findByRole("STAFF");
     }
 
     //xem thông tin theo id
