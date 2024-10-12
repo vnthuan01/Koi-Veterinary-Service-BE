@@ -19,7 +19,7 @@ public class ServicesType {
     @Column(name = "service_type_id")
     private int service_typeId;
 
-    @Column(name = "service_type_name")
+    @Column(name = "service_type")
     private String service_typeName;
 
     @Column(name = "service_price")

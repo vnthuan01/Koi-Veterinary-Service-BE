@@ -29,7 +29,6 @@ public class TimeSlot {
     @Column(name = "slot_date", nullable = false)
     private LocalDate slotDate;
 
-    @ManyToOne
-    @JoinColumn(name = "service_type_id", nullable = false)
-    private ServicesType serviceType;
+    @Column(name = "veterinarian_id", nullable = false)
+    private Integer veterinarianId;
 }

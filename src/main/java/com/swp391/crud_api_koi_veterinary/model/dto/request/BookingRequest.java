@@ -6,4 +6,5 @@ import lombok.Data;
 public class BookingRequest {
     private Integer servicesDetailId;
     private Integer slotId;
+    private Integer veterinarianId;
 }
