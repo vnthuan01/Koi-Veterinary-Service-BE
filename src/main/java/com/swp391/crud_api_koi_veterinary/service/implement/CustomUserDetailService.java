@@ -34,7 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private Collection<GrantedAuthority> rolesToAuthority(UserAccount user) {
         var roleList = new ArrayList<GrantedAuthority>();
-        roleList.add(new SimpleGrantedAuthority(String.format("ROLE_%s", user.getRole().toUpperCase())));
+        roleList.add(new SimpleGrantedAuthority(String.format("ROLE_%s", user.getRole())));
         return roleList;
     }
 }

@@ -1,5 +1,6 @@
 package com.swp391.crud_api_koi_veterinary.model.entity;
 
+import com.swp391.crud_api_koi_veterinary.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,8 +33,9 @@ public class UserAccount{
     @Column(name = "address")
     private String address;
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role" ,nullable = false)
+    private Role role;
 
     @Column(name = "fullname")
     private String fullname;
