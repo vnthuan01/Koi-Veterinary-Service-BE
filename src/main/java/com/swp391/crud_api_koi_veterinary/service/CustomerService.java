@@ -6,11 +6,10 @@ import com.swp391.crud_api_koi_veterinary.model.dto.request.UserUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.UserAccount;
 import com.swp391.crud_api_koi_veterinary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +32,8 @@ public class CustomerService {
 
     //Lấy danh sách account STAFF
     public List<UserAccount> getUserAccount() {
-        return userRepository.findByRole("STAFF");
+        // Thay đổi để tìm kiếm cả STAFF và VETERINARIAN
+        return userRepository.findByRoleIn(Arrays.asList("STAFF", "VETERINARIAN"));
     }
 
     //xem thông tin theo id
