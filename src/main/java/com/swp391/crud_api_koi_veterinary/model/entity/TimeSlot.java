@@ -30,6 +30,6 @@ public class TimeSlot {
     private LocalDate slotDate;
 
     @ManyToOne
-    @JoinColumn(name = "service_type_id", nullable = false)
-    private ServicesType serviceType;
+    @JoinColumn(name = "veterinarian_id", nullable = false)
+    private Veterinarian veterinarianId;
 }

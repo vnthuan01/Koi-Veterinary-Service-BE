@@ -5,5 +5,5 @@ public enum Role {
     STAFF,
     CUSTOMER,
     MANAGER,
-    DOCTOR
+    VETERINARIAN
 }

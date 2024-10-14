@@ -30,7 +30,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "veterinarian_id", nullable = true)
-    private UserAccount veterinarian;
+    private Veterinarian veterinarian;
 
     @ManyToOne
     @JoinColumn(name = "slot_id")

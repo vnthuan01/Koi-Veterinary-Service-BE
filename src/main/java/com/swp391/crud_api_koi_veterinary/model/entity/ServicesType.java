@@ -19,8 +19,8 @@ public class ServicesType {
     @Column(name = "service_type_id")
     private int service_typeId;
 
-    @Column(name = "service_type_name")
-    private String service_typeName;
+    @Column(name = "service_type")
+    private String service_type;
 
     @Column(name = "service_price")
     private BigDecimal price;

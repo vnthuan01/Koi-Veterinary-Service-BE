@@ -29,13 +29,23 @@ public class BookingServiceImpl implements BookingService {
         ServicesDetail servicesDetail = servicesDetailRepository.findById(request.getServicesDetailId())
                 .orElseThrow(() -> new RuntimeException("Services not found"));
 
-        TimeSlot timeSlot = timeSlotRepository.findById(request.getSlotId())
-                .orElseThrow(() -> new RuntimeException("Slot not found"));
+        TimeSlot timeSlot = request.getSlotId() != null ?
+                timeSlotRepository.findById(request.getSlotId())
+                        .orElseThrow(() -> new RuntimeException("Slot not found")) : null;
+
+        Veterinarian veterinarian = request.getVeterinarianId() != null ?
+                veterinarianRepository.findById(request.getVeterinarianId())
+                        .orElseThrow(() -> new RuntimeException("Veterinarian not found")) : null;
 
         Booking booking = new Booking();
         booking.setUser(user);
         booking.setServicesDetail(servicesDetail);
-        booking.setSlot(timeSlot);
+        if (veterinarian != null) {
+            booking.setVeterinarian(veterinarian);
+        }
+        if (timeSlot != null) {
+            booking.setSlot(timeSlot);
+        }
         booking.setBookingTime(LocalDateTime.now());
         booking.setStatus(BookingStatus.PENDING);
 
@@ -56,4 +66,6 @@ public class BookingServiceImpl implements BookingService {
     public List<String> getVeterinarian() {
         return veterinarianRepository.findVeterinarianFullNamesByServiceTypeId();
     }
+
+    //Lấy
 }

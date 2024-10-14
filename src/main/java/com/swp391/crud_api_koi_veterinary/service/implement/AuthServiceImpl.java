@@ -1,5 +1,6 @@
 package com.swp391.crud_api_koi_veterinary.service.implement;
 
+import com.swp391.crud_api_koi_veterinary.enums.Role;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.AuthenticationRequest;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.StaffCreationRequest;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.UserCreationRequest;
@@ -42,7 +43,7 @@ public class AuthServiceImpl implements AuthService {
                     .finishTime(LocalDateTime.now())
                     .id(user.getId())
                     .accessToken(accessToken)
-                    .role(user.getRole())
+                    .role(String.valueOf(user.getRole()))
                     .username(user.getUsername())
                     .email(user.getEmail())
                     .phone(user.getPhone())
@@ -66,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
         user.setFullname(request.getFullname());
         user.setPhone(request.getPhone());
         user.setAddress(request.getAddress());
-        user.setRole("CUSTOMER"); // Mặc định role là CUSTOMER
+        user.setRole(Role.CUSTOMER); // Mặc định role là CUSTOMER
 
         userRepository.save(user);
 
@@ -77,7 +78,7 @@ public class AuthServiceImpl implements AuthService {
         String accessToken = jwtService.generateAccessToken(authentication);
         return AuthenticationResponse.builder()
                 .accessToken(accessToken)
-                .role(user.getRole())
+                .role(String.valueOf(user.getRole()))
                 .finishTime(LocalDateTime.now())
                 .build();
     }
@@ -94,7 +95,7 @@ public class AuthServiceImpl implements AuthService {
         user.setFullname(request.getFullname());
         user.setPhone(request.getPhone());
         user.setAddress(request.getAddress());
-        user.setRole("STAFF");
+        user.setRole(Role.STAFF);
 
         userRepository.save(user);
 
@@ -105,7 +106,7 @@ public class AuthServiceImpl implements AuthService {
         String accessToken = jwtService.generateAccessToken(authentication);
         return AuthenticationResponse.builder()
                 .accessToken(accessToken)
-                .role(user.getRole())
+                .role(String.valueOf(user.getRole()))
                 .finishTime(LocalDateTime.now())
                 .build();
     }

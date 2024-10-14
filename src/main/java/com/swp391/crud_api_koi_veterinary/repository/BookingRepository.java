@@ -13,13 +13,13 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
     // Tìm tất cả các booking của một người dùng cụ thể
-    List<Booking> findByUserUsername(String username);
+    //List<Booking> findByUserUsername(String username);
 
     // Tìm tất cả các booking của một bác sĩ thú y cụ thể
-    List<Booking> findByVeterinarianUsername(String username);
+   // List<Booking> findByVeterinarianUsername(String username);
 
     // Tìm tất cả các booking theo trạng thái
-    List<Booking> findByStatus(BookingStatus status);
+    //List<Booking> findByStatus(BookingStatus status);
 
     // Bạn có thể thêm các phương thức truy vấn tùy chỉnh khác nếu cần
     @Query("SELECT b FROM Booking b WHERE b.user.username = :username AND b.bookingTime >= :startDate AND b.bookingTime <= :endDate")

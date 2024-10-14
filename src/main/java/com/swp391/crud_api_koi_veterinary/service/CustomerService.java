@@ -1,5 +1,6 @@
 package com.swp391.crud_api_koi_veterinary.service;
 
+import com.swp391.crud_api_koi_veterinary.enums.Role;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.UserCreationRequest;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.UserUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.UserAccount;
@@ -24,7 +25,7 @@ public class CustomerService {
         user.setPassword(passwordEncoder.encode(request.getPassword())); // Mã hóa mật khẩu
         user.setEmail(request.getEmail());
         user.setFullname(request.getFullname());
-        user.setRole("CUSTOMER"); // Mặc định là CUSTOMER
+        user.setRole(Role.CUSTOMER); // Mặc định là CUSTOMER
         user.setAddress(request.getAddress());
         user.setPhone(request.getPhone());
         return userRepository.save(user);
