@@ -11,4 +11,5 @@ public interface BookingService {
     Booking createBooking(BookingRequest request, String username);
     List<ServicesDetail> getAvailableServices();
     List<TimeSlot> getAvailableTimeSlots();
+    List<String> getVeterinarian();
 }

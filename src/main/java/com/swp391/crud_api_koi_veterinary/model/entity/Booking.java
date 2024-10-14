@@ -29,7 +29,7 @@ public class Booking {
     private ServicesDetail servicesDetail;
 
     @ManyToOne
-    @JoinColumn(name = "veterinarian_id", nullable = false)
+    @JoinColumn(name = "veterinarian_id", nullable = true)
     private UserAccount veterinarian;
 
     @ManyToOne

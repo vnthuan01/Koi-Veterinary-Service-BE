@@ -4,6 +4,7 @@ import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.Booking;
 import com.swp391.crud_api_koi_veterinary.model.entity.ServicesDetail;
 import com.swp391.crud_api_koi_veterinary.model.entity.TimeSlot;
+import com.swp391.crud_api_koi_veterinary.model.entity.Veterinarian;
 import com.swp391.crud_api_koi_veterinary.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,11 @@ public class BookingController {
     public ResponseEntity<List<TimeSlot>> getAvailableTimeSlots() {
         List<TimeSlot> timeSlots = bookingService.getAvailableTimeSlots();
         return ResponseEntity.ok(timeSlots);
+    }
+
+    @GetMapping("/veterinarians")
+    public ResponseEntity<List<String>> getVeterinarian() {
+        List<String> veterinarians = bookingService.getVeterinarian();
+        return ResponseEntity.ok(veterinarians);
     }
 }

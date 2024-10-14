@@ -19,6 +19,7 @@ public class BookingServiceImpl implements BookingService {
     private final UserRepository userRepository;
     private final ServicesDetailRepository servicesDetailRepository;
     private final TimeSlotRepository timeSlotRepository;
+    private final VeterinarianRepository veterinarianRepository;
 
     @Override
     public Booking createBooking(BookingRequest request, String username) {
@@ -49,5 +50,10 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<TimeSlot> getAvailableTimeSlots() {
         return timeSlotRepository.findBySlotDateGreaterThanEqual(LocalDate.now());
+    }
+
+    @Override
+    public List<String> getVeterinarian() {
+        return veterinarianRepository.findVeterinarianFullNamesByServiceTypeId();
     }
 }
