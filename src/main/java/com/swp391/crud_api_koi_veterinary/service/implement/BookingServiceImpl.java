@@ -2,6 +2,7 @@ package com.swp391.crud_api_koi_veterinary.service.implement;
 
 import com.swp391.crud_api_koi_veterinary.enums.BookingStatus;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingRequest;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingStatusUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.*;
 import com.swp391.crud_api_koi_veterinary.repository.*;
 import com.swp391.crud_api_koi_veterinary.service.BookingService;
@@ -61,11 +62,42 @@ public class BookingServiceImpl implements BookingService {
     public List<TimeSlot> getAvailableTimeSlots() {
         return timeSlotRepository.findBySlotDateGreaterThanEqual(LocalDate.now());
     }
-
+//Lấy các Vet làm service Onl
     @Override
     public List<Veterinarian> getVeterinarian() {
         return veterinarianRepository.findVeterinarianByServiceTypeId();
     }
-
-    //Lấy
+//Lấy tất cả Booking
+    @Override
+    public List<Booking> getAllBooking() {
+        return bookingRepository.findAll();
+    }
+//Lấy danh sách theo Id của Custom
+    @Override
+    public List<Booking> getBookingByUserId(int id) {
+        return bookingRepository.findByUser_Id(id);
+    }
+//Lấy danh sách theo Id của Vet
+    @Override
+    public List<Booking> getBookingByVeterinarianId(int veterinarianId) {
+        return bookingRepository.findByVeterinarian_veterinarianId(veterinarianId);
+    }
+//Update Booking Status
+    @Override
+    public Booking updateBookingStatus(BookingStatusUpdateRequest request, Integer bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Veterinarian not found"));
+        if (request.getStatus() != null){
+            booking.setStatus(request.getStatus());
+        }
+        return bookingRepository.save(booking);
+    }
+//Cancelled Booking
+    @Override
+    public Booking deleteBooking(Integer bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Veterinarian not found"));
+            booking.setStatus(BookingStatus.CANCELLED);
+        return bookingRepository.save(booking);
+    }
 }

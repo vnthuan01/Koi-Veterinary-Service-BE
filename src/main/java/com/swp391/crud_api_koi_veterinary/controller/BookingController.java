@@ -1,6 +1,7 @@
 package com.swp391.crud_api_koi_veterinary.controller;
 
 import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingRequest;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingStatusUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.Booking;
 import com.swp391.crud_api_koi_veterinary.model.entity.ServicesDetail;
 import com.swp391.crud_api_koi_veterinary.model.entity.TimeSlot;
@@ -43,4 +44,32 @@ public class BookingController {
         List<Veterinarian> veterinarians = bookingService.getVeterinarian();
         return ResponseEntity.ok(veterinarians);
     }
+//Get All booking API
+    @GetMapping
+    public ResponseEntity<List<Booking>> getAllBooking() {
+        List<Booking> bookings = bookingService.getAllBooking();
+        return ResponseEntity.ok(bookings);
+    }
+//Update booking API
+    @PutMapping("/{bookingId}")
+    public Booking updateBooking(@RequestBody BookingStatusUpdateRequest request, @PathVariable Integer bookingId){
+        return bookingService.updateBookingStatus(request, bookingId);
+    }
+//Cancelled booking API
+    @PutMapping("delete/{bookingId}")
+    public Booking deleteBooking(@PathVariable Integer bookingId){
+        return bookingService.deleteBooking(bookingId);
+    }
+// Api để lấy danh sách booking theo userId
+    @GetMapping("/user/{id}")
+    public List<Booking> getBookingByUserId(@PathVariable int id) {
+        return bookingService.getBookingByUserId(id);
+    }
+
+// Api để lấy danh sách booking theo veterinarianId
+    @GetMapping("/veterinarian/{veterinarianId}")
+    public List<Booking> getBookingByVeterinarianId(@PathVariable int veterinarianId) {
+        return bookingService.getBookingByVeterinarianId(veterinarianId);
+    }
+    
 }
