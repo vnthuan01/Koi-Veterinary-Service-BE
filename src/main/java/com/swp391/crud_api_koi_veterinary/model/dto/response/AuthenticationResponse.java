@@ -8,7 +8,13 @@ import lombok.Data;
 @Data
 @Builder
 public class AuthenticationResponse {
+    private int id;
     private String accessToken;
     private String role;
     private LocalDateTime finishTime;
+    private String username;
+    private String email;
+    private String phone;
+    private String address;
+    private String fullname;
 }

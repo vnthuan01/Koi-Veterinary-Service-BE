@@ -1,6 +1,7 @@
 package com.swp391.crud_api_koi_veterinary.controller;
 
 import com.swp391.crud_api_koi_veterinary.model.dto.request.UserCreationRequest;
+import com.swp391.crud_api_koi_veterinary.model.dto.request.UserUpdateRequest;
 import com.swp391.crud_api_koi_veterinary.model.entity.UserAccount;
 import com.swp391.crud_api_koi_veterinary.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -9,16 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/customers")
 @RequiredArgsConstructor
-public class CustomerController {
+public class UserController {
 
     private final CustomerService customerService;
 
     @PostMapping
     public UserAccount createUser(@RequestBody UserCreationRequest request) {
-        return customerService.createUser(request);
-    }
+        return customerService.createUser(request);}
 
     @GetMapping
     public List<UserAccount> getUserAccounts() {
@@ -34,5 +34,10 @@ public class CustomerController {
     public String deleteUser(@PathVariable int userId) {
         customerService.deleteAccount(userId);
         return "User has been deleted";
+    }
+//Update API
+    @PutMapping({"/{userId}"})
+    UserAccount updateUser(@PathVariable int userId, @RequestBody UserUpdateRequest request){
+        return customerService.updateUser(userId, request);
     }
 }

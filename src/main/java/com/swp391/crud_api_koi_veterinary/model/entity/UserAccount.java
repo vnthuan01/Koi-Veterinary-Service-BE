@@ -1,12 +1,14 @@
 package com.swp391.crud_api_koi_veterinary.model.entity;
 
+import com.swp391.crud_api_koi_veterinary.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Entity(name = "users")
+@Entity
+@Table(name = "user_account")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,13 +34,10 @@ public class UserAccount{
     @Column(name = "address")
     private String address;
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role" ,nullable = false)
+    private Role role;
 
-    @Column(name = "firstName")
-    private String firstName;
-
-    @Column(name = "lastName")
-    private String lastName;
-
+    @Column(name = "fullname")
+    private String fullname;
 }

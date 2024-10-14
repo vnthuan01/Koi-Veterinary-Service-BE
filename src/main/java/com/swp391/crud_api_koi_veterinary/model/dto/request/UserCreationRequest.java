@@ -16,8 +16,6 @@ public class UserCreationRequest {
 
     private String address;
 
-    private String firstName;
-
-    private String lastName;
+    private String fullname;
     // Bỏ trường role vì chúng ta sẽ đặt mặc định là "CUSTOMER"
 }

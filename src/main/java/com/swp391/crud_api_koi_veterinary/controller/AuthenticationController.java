@@ -1,5 +1,6 @@
 package com.swp391.crud_api_koi_veterinary.controller;
 
+import com.swp391.crud_api_koi_veterinary.model.dto.request.StaffCreationRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,15 +20,19 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationController {
     private final AuthService authService;
 
-    @RequestMapping("login")
+    @PostMapping("login")
     public ResponseEntity<AuthenticationResponse> usernamePasswordAuthentication(
-            @RequestBody AuthenticationRequest authenticationRequest
-    ) {
+            @RequestBody AuthenticationRequest authenticationRequest) {
         return ResponseEntity.ok(authService.localAuthentication(authenticationRequest));
     }
     
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody UserCreationRequest registerRequest) {
-        return ResponseEntity.ok(authService.register(registerRequest));
+        return ResponseEntity.ok(authService.registerAuthentication(registerRequest));
+    }
+    
+    @PostMapping("addstaff")
+    public ResponseEntity<AuthenticationResponse> createStaff(@RequestBody StaffCreationRequest staffRequest) {
+        return ResponseEntity.ok(authService.createStaffAuthentication(staffRequest));
     }
 }
