@@ -39,8 +39,8 @@ public class BookingController {
     }
 
     @GetMapping("/veterinarians")
-    public ResponseEntity<List<String>> getVeterinarian() {
-        List<String> veterinarians = bookingService.getVeterinarian();
+    public ResponseEntity<List<Veterinarian>> getVeterinarian() {
+        List<Veterinarian> veterinarians = bookingService.getVeterinarian();
         return ResponseEntity.ok(veterinarians);
     }
 }

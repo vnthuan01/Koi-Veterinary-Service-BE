@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface VeterinarianRepository extends JpaRepository<Veterinarian, Integer> {
     
-    @Query("SELECT v.user.fullname FROM Veterinarian v WHERE v.serviceTypeId.id = 1")
-    List<String> findVeterinarianFullNamesByServiceTypeId();
+    @Query("SELECT v FROM Veterinarian v JOIN FETCH v.user u JOIN FETCH v.serviceTypeId st WHERE st.id = 1")
+    List<Veterinarian> findVeterinarianByServiceTypeId();
 }

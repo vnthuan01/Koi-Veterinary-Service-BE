@@ -63,8 +63,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<String> getVeterinarian() {
-        return veterinarianRepository.findVeterinarianFullNamesByServiceTypeId();
+    public List<Veterinarian> getVeterinarian() {
+        return veterinarianRepository.findVeterinarianByServiceTypeId();
     }
 
     //Lấy
