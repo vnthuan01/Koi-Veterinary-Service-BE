@@ -16,7 +16,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     List<Booking> findByUser_Id(int id);
 
     // Tìm tất cả các booking của một bác sĩ thú y cụ thể
-    List<Booking> findByVeterinarian_veterinarianId(int veterinarianId);
+    List<Booking> findByVeterinarian_User_Id(int Id);
 
     // Tìm tất cả các booking theo trạng thái
     //List<Booking> findByStatus(BookingStatus status);

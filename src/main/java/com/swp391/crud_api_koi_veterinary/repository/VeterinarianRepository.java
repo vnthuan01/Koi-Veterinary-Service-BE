@@ -12,4 +12,8 @@ public interface VeterinarianRepository extends JpaRepository<Veterinarian, Inte
     
     @Query("SELECT v FROM Veterinarian v JOIN FETCH v.user u JOIN FETCH v.serviceTypeId st WHERE st.id = 1")
     List<Veterinarian> findVeterinarianByServiceTypeId();
+
+    @Query("SELECT CASE WHEN COUNT(v) > 0 THEN true ELSE false END FROM Veterinarian v JOIN v.user u WHERE u.id = :userId")
+    boolean existsByUserId(int userId);
+
 }

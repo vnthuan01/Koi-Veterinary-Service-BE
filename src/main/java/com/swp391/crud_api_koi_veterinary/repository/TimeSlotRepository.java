@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TimeSlotRepository extends JpaRepository<TimeSlot, Integer> {
-    List<TimeSlot> findBySlotDateGreaterThanEqual(LocalDate date);
+
 }

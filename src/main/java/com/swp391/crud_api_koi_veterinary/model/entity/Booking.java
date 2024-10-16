@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,10 +35,13 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "slot_id")
-    private TimeSlot slot;
+    private VeterinarianTimeSlot slot;
 
     @Column(name = "booking_time")
     private LocalDateTime bookingTime;
+
+    @Column(name = "service_time")
+    private LocalDate serviceTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

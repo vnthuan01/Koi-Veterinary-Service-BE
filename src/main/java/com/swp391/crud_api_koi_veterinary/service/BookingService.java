@@ -2,17 +2,14 @@ package com.swp391.crud_api_koi_veterinary.service;
 
 import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingRequest;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingStatusUpdateRequest;
-import com.swp391.crud_api_koi_veterinary.model.entity.Booking;
-import com.swp391.crud_api_koi_veterinary.model.entity.ServicesDetail;
-import com.swp391.crud_api_koi_veterinary.model.entity.TimeSlot;
-import com.swp391.crud_api_koi_veterinary.model.entity.Veterinarian;
+import com.swp391.crud_api_koi_veterinary.model.entity.*;
 
 import java.util.List;
 
 public interface BookingService {
     Booking createBooking(BookingRequest request, String username);
     List<ServicesDetail> getAvailableServices();
-    List<TimeSlot> getAvailableTimeSlots();
+    List<VeterinarianTimeSlot> getAvailableTimeSlots();
     List<Veterinarian> getVeterinarian();
 
     //CRUD Booking

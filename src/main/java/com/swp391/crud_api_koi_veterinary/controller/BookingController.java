@@ -2,10 +2,7 @@ package com.swp391.crud_api_koi_veterinary.controller;
 
 import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingRequest;
 import com.swp391.crud_api_koi_veterinary.model.dto.request.BookingStatusUpdateRequest;
-import com.swp391.crud_api_koi_veterinary.model.entity.Booking;
-import com.swp391.crud_api_koi_veterinary.model.entity.ServicesDetail;
-import com.swp391.crud_api_koi_veterinary.model.entity.TimeSlot;
-import com.swp391.crud_api_koi_veterinary.model.entity.Veterinarian;
+import com.swp391.crud_api_koi_veterinary.model.entity.*;
 import com.swp391.crud_api_koi_veterinary.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +31,8 @@ public class BookingController {
     }
 
     @GetMapping("/timeslots")
-    public ResponseEntity<List<TimeSlot>> getAvailableTimeSlots() {
-        List<TimeSlot> timeSlots = bookingService.getAvailableTimeSlots();
+    public ResponseEntity<List<VeterinarianTimeSlot>> getAvailableTimeSlots() {
+        List<VeterinarianTimeSlot> timeSlots = bookingService.getAvailableTimeSlots();
         return ResponseEntity.ok(timeSlots);
     }
 
@@ -61,15 +58,15 @@ public class BookingController {
         return bookingService.deleteBooking(bookingId);
     }
 // Api để lấy danh sách booking theo userId
-    @GetMapping("/user/{id}")
-    public List<Booking> getBookingByUserId(@PathVariable int id) {
-        return bookingService.getBookingByUserId(id);
+    @GetMapping("/user/{userId}")
+    public List<Booking> getBookingByUserId(@PathVariable int userId) {
+        return bookingService.getBookingByUserId(userId);
     }
 
 // Api để lấy danh sách booking theo veterinarianId
-    @GetMapping("/veterinarian/{veterinarianId}")
-    public List<Booking> getBookingByVeterinarianId(@PathVariable int veterinarianId) {
-        return bookingService.getBookingByVeterinarianId(veterinarianId);
+    @GetMapping("/veterinarian/{userId}")
+    public List<Booking> getBookingByVeterinarianId(@PathVariable int userId) {
+        return bookingService.getBookingByVeterinarianId(userId);
     }
     
 }
