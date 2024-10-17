@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Koi_vetServices {
+public class Services {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
