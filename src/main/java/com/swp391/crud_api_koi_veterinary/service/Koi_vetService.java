@@ -15,38 +15,47 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class Koi_vetService{
     @Autowired
-    private final ServiceRepository koi_vetRepository;
+    private final ServiceRepository serviceRepository;
 
 //1. Tạo 1 Service
     public Services createService(ServiceCreationRequest request) {
         Services service = new Services();
         service.setServiceName(request.getServiceName());
         service.setServiceDescription(request.getServiceDescription());
-        return koi_vetRepository.save(service);
+        return serviceRepository.save(service);
     }
 
 //2. Lấy danh sách Services
     public List<Services> getAllServices() {
-        return koi_vetRepository.findAll();
+            return serviceRepository.findAll();
     }
 
-    //3. Update 1 Service theo Id
+//3. Update 1 Service theo Id
     public Services updateService(int serviceId, ServiceUpdateRequest request) {
-        Services service = koi_vetRepository.findById(serviceId)
+        Services service = serviceRepository.findById(serviceId)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
-        service.setServiceName(request.getServiceName());
-        service.setServiceDescription(request.getServiceDescription());
-        return koi_vetRepository.save(service);
+        
+        // Cập nhật tên dịch vụ nếu có giá trị mới
+        if (request.getServiceName() != null && !request.getServiceName().isEmpty()) {
+            service.setServiceName(request.getServiceName());
+        }
+        
+        // Cập nhật mô tả dịch vụ nếu có giá trị mới
+        if (request.getServiceDescription() != null && !request.getServiceDescription().isEmpty()) {
+            service.setServiceDescription(request.getServiceDescription());
+        }
+        
+        return serviceRepository.save(service);
     }
 
     //4. Xóa 1 Service theo Id
     public void deleteService(int serviceId) {
-        koi_vetRepository.deleteById(serviceId);
+        serviceRepository.deleteById(serviceId);
     }
 
     //5. Lấy 1 Service theo Id
     public Optional<Services> getServiceById(int serviceId) {
-        return Optional.ofNullable(koi_vetRepository.findById(serviceId)
+        return Optional.ofNullable(serviceRepository.findById(serviceId)
                 .orElseThrow(() -> new RuntimeException("Service not found")));
     }
 }
